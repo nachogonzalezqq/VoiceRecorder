@@ -6,15 +6,15 @@ import { NewRecordPage, PlayRecordPage, RecordsListPage } from '../components/pa
 const Stack = createNativeStackNavigator();
 
 function Navigator() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="RecordsList" component={RecordsListPage} />
-        <Stack.Screen name="PlayRecord" component={PlayRecordPage} />
-        <Stack.Screen name="NewRecord" component={NewRecordPage} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen name="RecordsList" component={RecordsListPage} />
+				<Stack.Screen name="PlayRecord" component={PlayRecordPage} />
+				<Stack.Screen name="NewRecord" component={NewRecordPage} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
 
 export default Navigator;
