@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import Recorder from '../../organisms/recorder/recorder';
 
-interface NewRecordPageProps {}
-
-const NewRecordPage = (props: NewRecordPageProps) => {
+const NewRecordPage = () => {
 	return (
 		<View style={styles.container}>
-			<Text>NewRecordPage</Text>
+			<Recorder />
 		</View>
 	);
 };
@@ -14,5 +13,11 @@ const NewRecordPage = (props: NewRecordPageProps) => {
 export default NewRecordPage;
 
 const styles = StyleSheet.create({
-	container: {}
+	container: {
+		display: 'flex',
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+    backgroundColor: '#AFA7B2',
+	}
 });

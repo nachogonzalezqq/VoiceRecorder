@@ -1,18 +1,7 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { ListItem } from '../../molecules';
-import { ListItemProps } from '../../molecules/list-item/list-item';
-
-export interface Record {
-  fileUri: string;
-  title: string;
-  timestamp: number;
-  id: string
-}
-
-interface RecordsListProps {
-  records: ListItemProps[];
-}
+import { ListItemProps, RecordsListProps } from '../../../types/types';
 
 const RecordsList = (props: RecordsListProps) => {
 	return (
@@ -31,8 +20,9 @@ export default RecordsList;
 const styles = StyleSheet.create({
 	container: {
 		flex: 0.6,
-		backgroundColor: 'red',
-		width: '70%',
+		// backgroundColor: '#D2BEBF',
+    borderRadius: 10,
+		width: '80%',
 		alignItems: 'center'
 	}
 });

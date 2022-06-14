@@ -1,29 +1,19 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Record } from '../../organisms/records-list/records-list';
-
-interface ListItemActions {
-  onPressPlay: (arg0: Record) => void;
-  onPressDelete: (arg0: Record) => void;
-}
-
-export interface ListItemProps {
-  recordData: Record;
-  actions: ListItemActions;
-}
+import { ListItemProps } from '../../../types/types';
 
 const ListItem = (props: ListItemProps) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>{props.recordData.title}</Text>
-			<Text>{props.recordData.timestamp}</Text>
+			<Text style={styles.date}>{props.recordData.timestamp}</Text>
 			<View style={styles.actionsContainer}>
 				<TouchableOpacity onPress={() => props.actions.onPressPlay(props.recordData)}>
-					<Icon name='play' />
+					<Icon name='play' color="#213341" size={18} />
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => props.actions.onPressDelete(props.recordData)}>
-					<Icon name='trash' />
+					<Icon name='trash' color="#213341" size={18} />
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -34,19 +24,22 @@ export default ListItem;
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: 'blue',
+		backgroundColor: '#F5E7E4',
 		display: 'flex',
 		flexDirection: 'row',
 		width: '95%',
 		justifyContent: 'space-around',
     alignItems: 'center',
-    borderColor: '#000',
     borderRadius: 12,
-    borderWidth: 2,
     marginVertical: 3,
+    paddingVertical: 10,
 	},
   title: {
-    maxWidth: '20%',
+    maxWidth: '30%',
+    color: '#213341',
+  },
+  date: {
+    color: '#213341'
   },
   actionsContainer: {
     flexDirection: 'row',

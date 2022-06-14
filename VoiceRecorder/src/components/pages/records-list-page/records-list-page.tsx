@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { Button } from '@react-native-material/core';
 import { RecordsList } from '../../organisms/index';
-import { Record } from '../../organisms/records-list/records-list';
-import { ListItemProps } from '../../molecules/list-item/list-item';
-interface RecordsListPageProps {}
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Record, RecordsListPageProps, RootStackParamList, ListItemProps } from '../../../types/types';
 
 const demoData: Record[] = [
 	{
@@ -30,14 +30,14 @@ const demoData: Record[] = [
 
 
 const RecordsListPage = (props: RecordsListPageProps) => {
-	const onPressDebug = () => {
-		console.log('this is our debug');
-		const test = 'We should see this only using breakpoints';
-		return test;
+	const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+	const onNewRecordPress = () => {
+		navigation.navigate('NewRecord', {});
 	};
 	const onPressPlay = (item: Record) => {
 		console.log('playing');
 		console.log(item);
+		navigation.navigate('PlayRecord', {record: item})
 	};
 	const onPressDelete = (item: Record) => {
 		console.log('deleting');
@@ -47,7 +47,7 @@ const RecordsListPage = (props: RecordsListPageProps) => {
 	return (
 		<View style={styles.container}>
 			<RecordsList records={processedDemoData}/>
-			<Button title="Debug" onPress={onPressDebug}  />
+			<Button title="New record" onPress={onNewRecordPress}  />
 		</View>
 	);
 };
@@ -60,5 +60,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+    backgroundColor: '#AFA7B2',
 	}
 });
