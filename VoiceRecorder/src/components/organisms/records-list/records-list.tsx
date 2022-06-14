@@ -8,20 +8,20 @@ export interface Record {
   title: string;
   timestamp: number;
   id: string
-};
+}
 
 interface RecordsListProps {
   records: ListItemProps[];
-};
+}
 
 const RecordsList = (props: RecordsListProps) => {
 	return (
 		<View style={styles.container}>
 			<FlatList
-        data={props.records}
-        renderItem={({item} : {item: ListItemProps}) => (<ListItem {...item}/>)}
-        keyExtractor={(item: ListItemProps) => item.recordData.id}
-      />
+				data={props.records}
+				renderItem={({item} : {item: ListItemProps}) => (<ListItem {...item}/>)}
+				keyExtractor={(item: ListItemProps) => item.recordData.id}
+			/>
 		</View>
 	);
 };
@@ -30,9 +30,9 @@ export default RecordsList;
 
 const styles = StyleSheet.create({
 	container: {
-    flex: 0.6,
-    backgroundColor: 'red',
-    width: '70%',
-    alignItems: 'center'
-  }
+		flex: 0.6,
+		backgroundColor: 'red',
+		width: '70%',
+		alignItems: 'center'
+	}
 });
