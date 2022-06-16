@@ -7,6 +7,7 @@ import { v4 } from 'uuid';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import { processMiliseconds } from "../../../utils/logic-utils";
 import AudioPlayer from "../../molecules/audio-player/audio-player";
+import styles from "./styles";
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
@@ -43,13 +44,8 @@ const Recorder = () => {
     try {
       const permissionsResult = await checkPermissions();
       if (permissionsResult) {
-        console.log('pre id');
         const audioId = v4();
-        console.log('post id');
-        console.log('pre directory path');
-        const directoryPath = RNFS.DocumentDirectoryPath;
         await audioRecorderPlayer.startRecorder(`${RNFS.DocumentDirectoryPath}/${audioId}.mp3`);
-        //await audioRecorderPlayer.startRecorder();
         audioRecorderPlayer.addRecordBackListener(e => {
           setAudioDuration(e.currentPosition);
         })
@@ -66,11 +62,12 @@ const Recorder = () => {
     setAudioSource(result);
   };
   return (
-    <View>
-      {(audioSource !== '') && (
+    <View style={styles.recorderContainer}>
+      {(audioSource !== '') ? (
         <AudioPlayer source={audioSource} duration={audioDuration}/>
+      ) : (
+        <Text>{processMiliseconds(audioDuration)}</Text>
       )}
-      <Text>{processMiliseconds(audioDuration)}</Text>
       <Button title="Start recording" onPress={startRecording} />
       <Button title="Stop recording" onPress={stopRecording} />
     </View>
