@@ -25,3 +25,8 @@ export interface Record {
 export interface RecordsListProps {
   records: ListItemProps[];
 }
+
+export interface AudioPlayerProps {
+  source: string;
+  duration: number;
+}

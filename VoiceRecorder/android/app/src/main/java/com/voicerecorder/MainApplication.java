@@ -1,5 +1,5 @@
 package com.voicerecorder;
-
+import com.rnfs.RNFSPackage;
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
