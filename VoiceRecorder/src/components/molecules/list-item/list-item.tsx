@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import moment from 'moment';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ListItemProps } from '../../../types/types';
 
@@ -7,7 +8,7 @@ const ListItem = (props: ListItemProps) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>{props.recordData.title}</Text>
-			<Text style={styles.date}>{props.recordData.timestamp}</Text>
+			<Text style={styles.date}>{moment(props.recordData.timestamp).format('DD/MM/YY')}</Text>
 			<View style={styles.actionsContainer}>
 				<TouchableOpacity onPress={() => props.actions.onPressPlay(props.recordData)}>
 					<Icon name='play' color="#213341" size={18} />
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F5E7E4',
 		display: 'flex',
 		flexDirection: 'row',
-		width: '95%',
+		width: '92%',
 		justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 12,
@@ -35,15 +36,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
 	},
   title: {
-    maxWidth: '30%',
     color: '#213341',
+		flex: 0.2
   },
   date: {
-    color: '#213341'
+    color: '#213341',
+		flex: 0.2,
   },
   actionsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flex: .2
   }
 });

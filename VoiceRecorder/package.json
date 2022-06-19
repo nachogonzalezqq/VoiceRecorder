@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^6.2.1",
     "@types/react": "^18.0.12",
     "@types/react-native": "^0.67.8",
+    "moment": "^2.29.3",
     "react": "17.0.2",
     "react-native": "0.68.2",
     "react-native-audio-recorder-player": "^3.5.1",

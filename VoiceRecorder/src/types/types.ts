@@ -19,7 +19,8 @@ export interface Record {
   fileUri: string;
   title: string;
   timestamp: number;
-  id: string
+  id: string;
+  duration: number;
 }
 
 export interface RecordsListProps {

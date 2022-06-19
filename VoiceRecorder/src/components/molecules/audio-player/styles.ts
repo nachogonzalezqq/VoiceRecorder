@@ -31,6 +31,6 @@ export default StyleSheet.create({
     marginTop: 15,
     flexDirection: 'row',
     width: '50%',
-    justifyContent: 'space-between',
-  },
+    justifyContent: 'space-around',
+  }
 });

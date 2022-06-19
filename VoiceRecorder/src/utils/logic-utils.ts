@@ -3,4 +3,4 @@ export const processMiliseconds = (miliseconds: number) => {
   if (seconds < 10) return `00:0${seconds}`;
   if (seconds <= 60) return `00:${seconds}`;
   return `${seconds / 60}:${seconds % 60}`;
-}
+};
