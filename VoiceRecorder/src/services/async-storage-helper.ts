@@ -20,11 +20,13 @@ const addRecord = async (newRecord: Record) => {
   recordsToSave.push(newRecord);
   console.log('records to save');
   console.log(recordsToSave);
-  AsyncStorage.setItem(recordsListStorageKey, JSON.stringify(recordsToSave));
+  await AsyncStorage.setItem(recordsListStorageKey, JSON.stringify(recordsToSave));
 };
 
-const deleteRecord = () => {
-
+const deleteRecord = async (recordToDelete: Record) => {
+  const recordsList = await getRecordsList();
+  recordsList.splice(recordsList.indexOf(recordToDelete), 1);
+  await AsyncStorage.setItem(recordsListStorageKey, JSON.stringify(recordsList));
 };
 
 export default {

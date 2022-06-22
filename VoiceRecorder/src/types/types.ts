@@ -3,6 +3,7 @@ export interface RecordsListPageProps {}
 export type RootStackParamList = {
 	PlayRecord: {record: Record};
   NewRecord: {};
+  RecordsList: {};
 }
 
 export interface ListItemActions {
@@ -30,4 +31,9 @@ export interface RecordsListProps {
 export interface AudioPlayerProps {
   source: string;
   duration: number;
+}
+
+export interface ConfirmModalProps {
+  onCancel: () => void;
+  onConfirm: () => void;
 }

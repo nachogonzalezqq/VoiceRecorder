@@ -2,6 +2,7 @@ import { Button } from "@react-native-material/core";
 import React, { useState } from "react";
 import { View, Text, Platform, PermissionsAndroid, TextInput } from "react-native";
 import RNFS from 'react-native-fs';
+import { useNavigation } from "@react-navigation/native";
 import 'react-native-get-random-values';
 import { v4 } from 'uuid';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
@@ -9,8 +10,9 @@ import { processMiliseconds } from "../../../utils/logic-utils";
 import AudioPlayer from "../../molecules/audio-player/audio-player";
 import styles from "./styles";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { Record } from "../../../types/types";
+import { Record, RootStackParamList } from "../../../types/types";
 import AsyncStorageHelper from "../../../services/async-storage-helper";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 const audioRecorderPlayer = new AudioRecorderPlayer();
 
@@ -21,6 +23,7 @@ const Recorder = () => {
   const [missingTitleErrorVisible, setMissingErrorVisible] = useState(false);
   const [recording, setRecording] = useState(false);
 
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const checkPermissions = async () => {
     if (Platform.OS === 'android') {
@@ -86,7 +89,7 @@ const Recorder = () => {
     setRecording(false);
   };
 
-  const confirmRecordSave = () => {
+  const confirmRecordSave = async () => {
     if (audioTitle === '') {
       setMissingErrorVisible(true);
       return;
@@ -99,7 +102,8 @@ const Recorder = () => {
       duration: audioDuration,
       fileUri: audioSource,
     }
-    AsyncStorageHelper.addRecord(newRecord);
+    await AsyncStorageHelper.addRecord(newRecord);
+    navigation.navigate('RecordsList', {});
   };
 
   const recordButtonLeftMargin = audioSource ? '0%' : '25%';

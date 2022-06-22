@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
@@ -15,6 +15,12 @@ const AudioPlayer = (props: AudioPlayerProps) => {
   const [paused, setPaused] = useState(false);
   const [currentProgress, setCurrentProgress] = useState('0%');
   const [currentPosition, setCurrentPosition] = useState(0);
+
+  useEffect(() => {
+   return () => {
+     audioRecorderPlayer.removePlayBackListener();
+   } 
+  }, [])
 
   const playback = async () => {
     if (!paused) {

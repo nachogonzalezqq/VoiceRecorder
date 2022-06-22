@@ -6,35 +6,12 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Record, RecordsListPageProps, RootStackParamList, ListItemProps } from '../../../types/types';
 import AsyncStorageHelper from '../../../services/async-storage-helper';
-
-const demoData: Record[] = [
-	{
-		id: '1',
-		title: 'test record 1 longer title',
-		timestamp: 123456,
-		fileUri: 'test uri',
-		duration: 20000,
-	},
-	{
-		id: '2',
-		title: 'test record 1',
-		timestamp: 123456,
-		fileUri: 'test uri',
-		duration: 200000,
-	},
-	{
-		id: '3',
-		title: 'test record 1',
-		timestamp: 123456,
-		fileUri: 'test uri',
-		duration: 20000,
-	}
-];
-
-
+import ConfirmModal from '../../molecules/confirm-modal/confirm-modal';
 
 const RecordsListPage = (props: RecordsListPageProps) => {
 	const [records, setRecords] = useState([]);
+	const [recordToDelete, setRecordToDelete] = useState<Record>();
+
 	const isFocused = useIsFocused();
 
 	const getStoredRecords = async () => {
@@ -60,12 +37,26 @@ const RecordsListPage = (props: RecordsListPageProps) => {
 	const onPressDelete = (item: Record) => {
 		console.log('deleting');
 		console.log(item);
+		setRecordToDelete(item);
 	};
+	const onDeleteConfirm = async () => {
+		if (recordToDelete) {
+			await AsyncStorageHelper.deleteRecord(recordToDelete);
+			setRecordToDelete(undefined);
+			getStoredRecords();
+		}
+	};
+	const onDeleteCancel = () => setRecordToDelete(undefined);
+
 	const processedRecords: ListItemProps[] = records.map(item => ({recordData: item, actions: {onPressDelete, onPressPlay}}));
+
 	return (
 		<View style={styles.container}>
 			<RecordsList records={processedRecords}/>
-			<Button title="New record" onPress={onNewRecordPress}  />
+			<Button title="New record" onPress={onNewRecordPress} color="#D2BEBF" />
+			{recordToDelete && (
+				<ConfirmModal onCancel={onDeleteCancel} onConfirm={onDeleteConfirm} />
+			)}
 		</View>
 	);
 };

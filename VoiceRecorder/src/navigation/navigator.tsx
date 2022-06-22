@@ -13,9 +13,9 @@ function Navigator() {
 					backgroundColor: '#D2BEBF'
 				}
 			}}>
-				<Stack.Screen name="RecordsList" component={RecordsListPage} />
-				<Stack.Screen name="PlayRecord" component={PlayRecordPage} />
-				<Stack.Screen name="NewRecord" component={NewRecordPage} />
+				<Stack.Screen name="RecordsList" options={{title: 'Your records'}} component={RecordsListPage} />
+				<Stack.Screen name="PlayRecord" options={{title: ''}} component={PlayRecordPage} />
+				<Stack.Screen name="NewRecord" options={{title: 'Create new record'}} component={NewRecordPage} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
